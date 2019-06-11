@@ -1,17 +1,20 @@
 package com.jojoldu.book.springboot.config.auth;
 
-import com.jojoldu.book.springboot.domain.member.Role;
-import org.springframework.context.annotation.Configuration;
+import com.jojoldu.book.springboot.domain.user.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.springframework.http.HttpMethod.POST;
 
-@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private OidcUserService oidcUserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -22,12 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/api/v1/**").hasAnyRole(Role.USER.name())
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login()
-                .loginPage("/")
-                .and()
                 .headers().frameOptions().disable()
-                .and()
-                .exceptionHandling()
                 .and()
                 .formLogin()
                 .successForwardUrl("/")
@@ -36,6 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+//                .oauth2Client()
+//                .and()
+                .oauth2Login()
+                .loginPage("/")
+                .userInfoEndpoint()
+                .oidcUserService(this.oidcUserService);
     }
 }

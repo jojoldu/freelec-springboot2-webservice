@@ -1,4 +1,4 @@
-package com.jojoldu.book.springboot.domain.member;
+package com.jojoldu.book.springboot.domain.user;
 
 import com.jojoldu.book.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Member extends BaseTimeEntity {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Member extends BaseTimeEntity {
     private String picture;
 
     @Builder
-    public Member(String name, String email, String principalId, String picture) {
+    public User(String name, String email, String principalId, String picture) {
         this.name = name;
         this.email = email;
         this.principalId = principalId;

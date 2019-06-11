@@ -1,6 +1,6 @@
 package com.jojoldu.book.springboot.config.auth.dto;
 
-import com.jojoldu.book.springboot.domain.member.Member;
+import com.jojoldu.book.springboot.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -23,17 +23,17 @@ public class GoogleUser {
         this.memo = memo;
     }
 
-    public static GoogleUser of(Map<String, Object> authenticated) {
+    public static GoogleUser of(Map<String, Object> attributes) {
         return GoogleUser.builder()
-                .principalId((String) authenticated.get("id"))
-                .name((String) authenticated.get("name"))
-                .email((String) authenticated.get("email"))
-                .picture((String) authenticated.get("picture"))
+                .principalId((String) attributes.get("id"))
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .picture((String) attributes.get("picture"))
                 .build();
     }
 
-    public Member toEntity() {
-        return Member.builder()
+    public User toEntity() {
+        return User.builder()
                 .principalId(principalId)
                 .name(name)
                 .email(email)

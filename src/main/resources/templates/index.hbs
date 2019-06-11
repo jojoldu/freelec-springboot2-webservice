@@ -9,12 +9,15 @@
     <h1>스프링부트로 시작하는 웹 서비스</h1>
     <div class="col-md-12">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록</button>
-        <div class="container unauthenticated">
-            <a href="/login/oauth2/code/google">Google Login</a>
-        </div>
-        <div class="container authenticated" style="display:none">
-            Logged in as: <span id="user"></span>
-        </div>
+        {{#if user}}
+            <div class="container authenticated" style="display:none">
+                Logged in as: <span id="user"></span>
+            </div>
+        {{else}}
+            <div class="container unauthenticated">
+                <a href="/login/oauth2/code/google">Google Login</a>
+            </div>
+        {{/if}}
 
         <!-- 목록 출력 영역 -->
         <table class="table table-horizontal table-bordered">
