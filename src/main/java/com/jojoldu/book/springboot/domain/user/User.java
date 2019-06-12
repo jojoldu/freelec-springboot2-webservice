@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,11 +34,22 @@ public class User extends BaseTimeEntity {
     @Column
     private String picture;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     @Builder
-    public User(String name, String email, String principalId, String picture) {
+    public User(String name, String email, String principalId, String picture, Role role) {
         this.name = name;
         this.email = email;
         this.principalId = principalId;
         this.picture = picture;
+        this.role = role;
     }
+
+    public void update(String name, String picture) {
+        this.name = name;
+        this.picture = picture;
+    }
+
 }

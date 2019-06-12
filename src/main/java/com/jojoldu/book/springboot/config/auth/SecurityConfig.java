@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.springframework.http.HttpMethod.POST;
 
@@ -14,11 +12,13 @@ import static org.springframework.http.HttpMethod.POST;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private OidcUserService oidcUserService;
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private CustomOAuth2UserService customOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
         http
                 .authorizeRequests()
                 .antMatchers("/", "/login/oauth2/**", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
@@ -35,11 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .csrf().disable()
-//                .oauth2Client()
-//                .and()
                 .oauth2Login()
-                .loginPage("/")
                 .userInfoEndpoint()
-                .oidcUserService(this.oidcUserService);
+                .userService(customOAuth2UserService)
+                .and()
+                .loginPage("/");
     }
 }
