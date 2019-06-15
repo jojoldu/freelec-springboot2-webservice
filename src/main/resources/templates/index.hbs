@@ -8,17 +8,18 @@
 <body>
     <h1>스프링부트로 시작하는 웹 서비스</h1>
     <div class="col-md-12">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록</button>
-        {{#if user}}
-            <div class="container authenticated" style="display:none">
-                Logged in as: <span id="user"></span>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록
+                </button>
+                {{#if userName}}
+                    Logged in as: <span id="user">{{userName}}</span>
+                {{else}}
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                {{/if}}
             </div>
-        {{else}}
-            <div class="container unauthenticated">
-                <a href="/oauth2/authorization/google">Google Login</a>
-            </div>
-        {{/if}}
-
+        </div>
+        <br>
         <!-- 목록 출력 영역 -->
         <table class="table table-horizontal table-bordered">
             <thead class="thead-strong">

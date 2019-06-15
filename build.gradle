@@ -32,6 +32,7 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security:spring-security-oauth2-client')
+    compile('org.springframework.security:spring-security-oauth2-jose')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
