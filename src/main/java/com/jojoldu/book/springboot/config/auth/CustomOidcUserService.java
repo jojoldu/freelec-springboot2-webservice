@@ -4,6 +4,7 @@ import com.jojoldu.book.springboot.config.auth.dto.GoogleUser;
 import com.jojoldu.book.springboot.domain.user.User;
 import com.jojoldu.book.springboot.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -28,7 +29,7 @@ public class CustomOidcUserService extends OidcUserService {
         httpSession.setAttribute("user", user);
 
         return new DefaultOidcUser(
-                Collections.singleton(user.getRole().getAuthority()),
+                Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 oidcUser.getIdToken(),
                 oidcUser.getUserInfo());
     }
