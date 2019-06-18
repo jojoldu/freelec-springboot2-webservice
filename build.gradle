@@ -30,9 +30,7 @@ dependencies {
     compile('com.h2database:h2')
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.1')
 
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.security:spring-security-oauth2-client')
-    compile('org.springframework.security:spring-security-oauth2-jose')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

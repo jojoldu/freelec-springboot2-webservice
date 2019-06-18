@@ -7,11 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
@@ -23,20 +24,20 @@ public class CustomOidcUserService extends OidcUserService {
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         OidcUser oidcUser = super.loadUser(userRequest);
         GoogleUser googleUser = GoogleUser.of(oidcUser.getAttributes());
-        saveOrUpdate(googleUser);
-        httpSession.setAttribute("user", googleUser);
-        return oidcUser;
+        User user = saveOrUpdate(googleUser);
+        httpSession.setAttribute("user", user);
+
+        return new DefaultOidcUser(
+                Collections.singleton(user.getRole().getAuthority()),
+                oidcUser.getIdToken(),
+                oidcUser.getUserInfo());
     }
 
-    private void saveOrUpdate(GoogleUser googleUser) {
-        Optional<User> userOptional = userRepository.findByEmail(googleUser.getEmail());
+    private User saveOrUpdate(GoogleUser googleUser) {
+        User user = userRepository.findByEmail(googleUser.getEmail())
+                .map(entity -> entity.update(googleUser.getName(), googleUser.getPicture()))
+                .orElse(googleUser.toEntity());
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.update(googleUser.getName(), googleUser.getPicture());
-            userRepository.save(user);
-        } else {
-            userRepository.save(googleUser.toEntity());
-        }
+        return userRepository.save(user);
     }
 }
