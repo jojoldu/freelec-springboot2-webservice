@@ -14,6 +14,7 @@
                 </button>
                 {{#if userName}}
                     Logged in as: <span id="user">{{userName}}</span>
+                    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
                 {{else}}
                     <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
                 {{/if}}
