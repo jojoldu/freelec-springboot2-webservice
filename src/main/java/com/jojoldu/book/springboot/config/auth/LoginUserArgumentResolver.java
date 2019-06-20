@@ -1,6 +1,6 @@
 package com.jojoldu.book.springboot.config.auth;
 
-import com.jojoldu.book.springboot.domain.user.UserRepository;
+import com.jojoldu.book.springboot.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -9,19 +9,23 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Component
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final UserRepository userRepository;
+    private final HttpSession httpSession;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return false;
+        boolean isLoginUserAnnotation = parameter.getParameterAnnotation(LoginUser.class) != null;
+        boolean isUserClass = User.class.equals(parameter.getParameterType());
+        return isLoginUserAnnotation && isUserClass;
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        return null;
+        return httpSession.getAttribute("user");
     }
 }
