@@ -1,6 +1,7 @@
 package com.jojoldu.book.springboot.config.auth;
 
 import com.jojoldu.book.springboot.config.auth.dto.GoogleUser;
+import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.domain.user.User;
 import com.jojoldu.book.springboot.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class CustomOidcUserService extends OidcUserService {
         OidcUser oidcUser = super.loadUser(userRequest);
         GoogleUser googleUser = GoogleUser.of(oidcUser.getAttributes());
         User user = saveOrUpdate(googleUser);
-        httpSession.setAttribute("user", user);
+        httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOidcUser(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
