@@ -1,0 +1,16 @@
+language: java
+jdk:
+- openjdk8
+
+branches:
+  only:
+  - master # Master Push에서만 CI 실행
+
+# Travis CI 서버의 Maven/Gradle Dependency 캐시 Home
+cache:
+  directories:
+  - '$HOME/.m2/repository'
+  - '$HOME/.gradle'
+
+# Travis CI에서 실행할 명령어
+script: "./gradlew clean build"
