@@ -1,16 +1,21 @@
 language: java
 jdk:
-- openjdk8
+  - openjdk8
 
 branches:
   only:
-  - master # Master Push에서만 CI 실행
+    - master
 
-# Travis CI 서버의 Maven/Gradle Dependency 캐시 Home
+# Travis CI 서버의 Home
 cache:
   directories:
-  - '$HOME/.m2/repository'
-  - '$HOME/.gradle'
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
 
-# Travis CI에서 실행할 명령어
 script: "./gradlew clean build"
+
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - jojoldu@gmail.com
