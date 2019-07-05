@@ -19,7 +19,7 @@ before_deploy:
   - cp appspec.yml deploy-files/
   - cp build/libs/*.jar deploy-files/
   - cd deploy-files && zip -r deploy-files * # deploy-files로 이동후 전체 압
-  - ll
+  - ls -al
   - cd ../ # 상위 디렉토리로 이동 (root 위치로 이동)
   - cp -r deploy-files/deploy-files.zip deploy/ # deploy로 zip파일 이동
 
