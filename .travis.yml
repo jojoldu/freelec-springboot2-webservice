@@ -15,13 +15,13 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - mkdir deploy-files # zip에 포함시킬 파일들을 담을 디렉토리 생성
-  - cp -r scripts/ deploy-files/
-  - cp appspec.yml deploy-files/
-  - cp build/libs/*.jar deploy-files/
-  - cd deploy-files && zip -r deploy-files * # deploy-files로 이동후 전체 압
+  - mkdir before-deploy # zip에 포함시킬 파일들을 담을 디렉토리 생성
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy * # before-deploy로 이동후 전체 압
   - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
-  - mv deploy-files/deploy-files.zip deploy/ # deploy로 zip파일 이동
+  - mv before-deploy/before-deploy.zip deploy/ # deploy로 zip파일 이동
 
 deploy:
   - provider: s3
