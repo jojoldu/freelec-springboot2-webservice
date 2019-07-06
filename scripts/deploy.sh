@@ -29,9 +29,9 @@ echo "> JAR Name: $JAR_NAME"
 
 echo "> Jar에 실행권한 추가"
 
-chmod +x $REPOSITORY/$JAR_NAME
+chmod +x $JAR_NAME
 
 nohup java -jar \
         -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
         -Dspring.profiles.active=real \
-        $REPOSITORY/$JAR_NAME > /dev/null 2> /dev/null < /dev/null &
+        $JAR_NAME > /dev/null 2> /dev/null < /dev/null &
