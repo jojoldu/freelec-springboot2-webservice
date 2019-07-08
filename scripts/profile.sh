@@ -5,7 +5,7 @@ function find_idle_profile()
 {
     RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
 
-    if [ ${RESPONSE_CODE} -ge 400 ]
+    if [ ${RESPONSE_CODE} -ge 400 ] # 400 보다 크면 (즉, 40x/50x 에러 모두 포함)
     then
         CURRENT_PROFILE=set2
     else
@@ -15,9 +15,6 @@ function find_idle_profile()
     if [ ${CURRENT_PROFILE} == set1 ]
     then
       IDLE_PROFILE=set2
-    elif [ ${CURRENT_PROFILE} == set2 ]
-    then
-      IDLE_PROFILE=set1
     else
       IDLE_PROFILE=set1
     fi

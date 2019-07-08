@@ -24,7 +24,3 @@ hooks:
     - location: health.sh # 새 스프링 부트가 정상적으로 실행됐는지 확인 합니다.
       timeout: 60
       runas: ec2-user
-  BeforeAllowTraffic:
-    - location: switch.sh # 엔진엑스와 새 스프링 부트를 연결합니다.
-      timeout: 30
-      runas: ec2-user
