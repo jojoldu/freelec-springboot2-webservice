@@ -7,13 +7,10 @@ function find_idle_profile()
 
     if [ ${RESPONSE_CODE} -ge 400 ] # 400 보다 크면 (즉, 40x/50x 에러 모두 포함)
     then
-        echo "정상 응답이 아니라서 set1로 교체하기 위해 set2를 할당합니다."
         CURRENT_PROFILE=set2
     else
         CURRENT_PROFILE=$(curl -s http://localhost/profile)
     fi
-
-    echo "CURRENT_PROFILE=$CURRENT_PROFILE"
 
     if [ ${CURRENT_PROFILE} == set1 ]
     then
@@ -22,7 +19,7 @@ function find_idle_profile()
       IDLE_PROFILE=set1
     fi
 
-    echo "IDLE_PROFILE=$IDLE_PROFILE"
+    echo "${IDLE_PROFILE}"
 }
 
 # 쉬고 있는 profile의 port 찾기

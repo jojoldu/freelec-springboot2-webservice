@@ -40,4 +40,4 @@ nohup java -jar \
             /home/ec2-user/app/application-oauth.properties, \
             /home/ec2-user/app/application-real-db.properties \
         -Dspring.profiles.active=real \
-        $JAR_NAME > /dev/null 2>&1 &
+        $JAR_NAME > $REPOSITORY/nohup.out > /dev/null 2>&1 &
