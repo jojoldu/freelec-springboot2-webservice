@@ -12,13 +12,14 @@
             <div class="col-md-6">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록
                 </button>
-                {{#if userName}}
+                {{#userName}}
                     Logged in as: <span id="user">{{userName}}</span>
                     <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-                {{else}}
+                {{/userName}}
+                {{^userName}}
                     <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
                     <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
-                {{/if}}
+                {{/userName}}
             </div>
         </div>
         <br>
@@ -33,14 +34,14 @@
             </tr>
             </thead>
             <tbody id="tbody">
-            {{#each posts}}
+            {{#posts}}
                 <tr>
                     <td>{{id}}</td>
                     <td>{{title}}</td>
                     <td>{{author}}</td>
                     <td>{{modifiedDate}}</td>
                 </tr>
-            {{/each}}
+            {{/posts}}
             </tbody>
         </table>
     </div>
