@@ -6,6 +6,17 @@
 
 상단의 [Issue 탭](https://github.com/jojoldu/freelec-springboot2-webservice/issues)에서 검색 혹은 추가 이슈등록을 부탁드립니다!
 
+### 질문 올리는 법
+
+* 페이지 번호
+* 문제가 된 프로젝트가 올라간 Github 저장소 주소
+* 문제가 된 로그 혹은 콘솔 출력 화면
+
+을 함께 포함해서 남겨주세요.  
+그렇지 않으면 확인 하기가 너무 어렵습니다.
+
+* [이슈 참고](https://github.com/jojoldu/freelec-springboot2-webservice/issues/100)
+
 ## 프로젝트 환경 점검
 
 이 책의 모든 예제는 다음의 환경에서 진행됩니다.
