@@ -12,6 +12,7 @@ assignees: jojoldu
 ## 가장 자주 나온 제보
 
 * [P.105 @PutMapping("/api/v1/posts")](https://github.com/jojoldu/freelec-springboot2-webservice/issues/6)
+* [P.111 Posts.update](https://github.com/jojoldu/freelec-springboot2-webservice/issues/15)
 
 ### 오타
 
