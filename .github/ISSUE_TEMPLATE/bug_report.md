@@ -9,6 +9,10 @@ assignees: jojoldu
 
 기존에 올라온 제보가 아닌지 먼저 검색해주세요!
 
+## 가장 자주 나온 제보
+
+* [P.105 @PutMapping("/api/v1/posts")](https://github.com/jojoldu/freelec-springboot2-webservice/issues/6)
+
 ### 오타
 
 * as-is (오타):
