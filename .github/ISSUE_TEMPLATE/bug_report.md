@@ -2,7 +2,7 @@
 name: 오타 제보
 about: 오타 발견시 작성해주세요.
 title: "[오타 제보] p.몇페이지"
-labels: 4쇄반영, 오타
+labels: 5쇄반영, 오타
 assignees: jojoldu
 
 ---
