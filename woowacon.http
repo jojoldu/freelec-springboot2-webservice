@@ -1,0 +1,5 @@
+
+POST https://www.woowacon.com/users/tickets/7
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+__RequestVerificationToken=HZy3kjs52EhcO6Wu1q3KXJr7HvTYe8un_cmC2k70XsBnlGgZyDvXVPlwMakxnHsvl_38vk6IF-aSleFXpmXJrsOkxL0ICdX5gsWqB9KaNQ01

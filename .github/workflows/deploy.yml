@@ -1,0 +1,34 @@
+name: freelec-springboot2-webservice
+
+on:
+  push:
+    branches:
+      - version/2020-12-11 # 일반적으로는 master로 함 (저는 별도 브랜치로 지정)
+  workflow_dispatch: # 수동 실행
+
+env:
+  MODULE_NAME: logging-system
+  S3_BUCKET_NAME: logging-system-deploy
+  PROJECT_NAME: playground-logging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
+      - name: Build with Gradle
+        run: |
+          ./gradlew clean build
+        shell: bash
