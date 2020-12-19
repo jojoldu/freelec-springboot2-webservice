@@ -27,9 +27,10 @@ jobs:
         shell: bash
 
       - name: Generate deployment package
-        run: mkdir -p archive \
-        cp build/libs/*.jar archive/application.jar \
-        cp -r ./.ebextensions archive/.ebextensions \
-        cd archive \
+        run: |
+        mkdir -p archive
+        cp build/libs/*.jar archive/application.jar
+        cp -r .ebextensions archive/.ebextensions
+        cd archive
         ls -al
         shell: bash
