@@ -28,8 +28,8 @@ jobs:
 
       - name: Generate deployment package
         run: |
-          mkdir -p archive
-          cp build/libs/*.jar archive/application.jar
-          cp -r .ebextensions archive/.ebextensions
-          cd archive
-          ls -al
+          mkdir -p deploy
+          cp build/libs/*.jar deploy/application.jar
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cd deploy && zip -r deploy.zip .
