@@ -33,3 +33,14 @@ jobs:
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v14
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          environment_name: freelect-springboot2-webservice
+          application_name: freelect-springboot2-webservice
+          version_label: 12345
+          region: ap-northeast-2
+          deployment_package: deploy/deploy.zip
