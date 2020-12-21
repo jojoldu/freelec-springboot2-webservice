@@ -41,16 +41,13 @@ jobs:
           format: YYYY-MM-DDTHH-mm-ss
           utcOffset: "+09:00"
 
-      - name: Use current time
-        run: echo ${{ steps.current-time.outputs.formattedTime }}
-
-#      - name: Deploy to EB
-#        uses: einaregilsson/beanstalk-deploy@v14
-#        with:
-#          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          application_name: freelec-springboot2-webervice
-#          environment_name: freelec-springboot2-webervice
-#          version_label: github-action-${{steps.format-time.outputs.replaced}}
-#          region: ap-northeast-2
-#          deployment_package: deploy/deploy.zip
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v14
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: freelec-springboot2-webervice
+          environment_name: freelec-springboot2-webervice
+          version_label: github-action-${{steps.current-time.outputs.formattedTime}}
+          region: ap-northeast-2
+          deployment_package: deploy/deploy.zip
