@@ -34,13 +34,26 @@ jobs:
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
 
+      - name: Get timestamp
+        uses: gerred/actions/current-time@master
+        id: current-time
+
+      - name: Run string replace
+        uses: frabert/replace-string-action@master
+        id: format-time
+        with:
+          pattern: '[:\.]+'
+          string: "${{ steps.current-time.outputs.time }}"
+          replace-with: '-'
+          flags: 'g'
+
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          environment_name: freelect-springboot2-webservice
-          application_name: freelect-springboot2-webservice
-          version_label: 12345
+          application_name: freelec-springboot2-webervice
+          environment_name: freelec-springboot2-webervice
+          version_label: github-action-${{steps.format-time.outputs.replaced}}
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip
