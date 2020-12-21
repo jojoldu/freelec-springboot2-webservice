@@ -34,15 +34,15 @@ jobs:
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
 
-    - name: Get current time
-      uses: 1466587594/get-current-time@v2
-      id: current-time
-      with:
-        format: YYYY-MM-DDTHH-mm-ss
-        utcOffset: "+09:00"
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
 
-    - name: Use current time
-      run: echo ${{ steps.current-time.outputs.time }}
+      - name: Use current time
+        run: echo ${{ steps.current-time.outputs.time }}
 
 #      - name: Deploy to EB
 #        uses: einaregilsson/beanstalk-deploy@v14
