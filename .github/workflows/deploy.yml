@@ -3,7 +3,8 @@ name: freelec-springboot2-webservice
 on:
   push:
     branches:
-      - version/2020-12-11 # 일반적으로는 master로 함 (저는 별도 브랜치로 지정)
+      - version/2020-12-11  # push되면 실행될 브랜치를 선택합니다.
+                            # ex) master (저는 version/2020-12-11 브랜치로 지정)
   workflow_dispatch: # 수동 실행
 
 jobs:
@@ -26,15 +27,6 @@ jobs:
         run: ./gradlew clean build
         shell: bash
 
-      - name: Generate deployment package
-        run: |
-          mkdir -p deploy
-          cp build/libs/*.jar deploy/application.jar
-          cp Procfile deploy/Procfile
-          cp -r .ebextensions deploy/.ebextensions
-          cp -r .platform deploy/.platform
-          cd deploy && zip -r deploy.zip .
-
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
@@ -42,13 +34,26 @@ jobs:
           format: YYYY-MM-DDTHH-mm-ss
           utcOffset: "+09:00"
 
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v14
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: freelec-springboot2-webervice
-          environment_name: freelec-springboot2-webervice
-          version_label: github-action-${{steps.current-time.outputs.formattedTime}}
-          region: ap-northeast-2
-          deployment_package: deploy/deploy.zip
+      - name: Show Current Time
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
+        shell: bash
+
+#      - name: Generate deployment package
+#        run: |
+#          mkdir -p deploy
+#          cp build/libs/*.jar deploy/application.jar
+#          cp Procfile deploy/Procfile
+#          cp -r .ebextensions deploy/.ebextensions
+#          cp -r .platform deploy/.platform
+#          cd deploy && zip -r deploy.zip .
+#
+#      - name: Deploy to EB
+#        uses: einaregilsson/beanstalk-deploy@v14
+#        with:
+#          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          application_name: freelec-springboot2-webervice
+#          environment_name: freelec-springboot2-webervice
+#          version_label: github-action-${{steps.current-time.outputs.formattedTime}}
+#          region: ap-northeast-2
+#          deployment_package: deploy/deploy.zip
