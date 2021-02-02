@@ -30,7 +30,7 @@ deploy:
     local_dir: deploy
     wait-until-deployed: true
 
-  -provider: codedeploy
+  - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY
     bucket: freelec-springboot-builddd
