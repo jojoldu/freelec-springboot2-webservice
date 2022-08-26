@@ -1,6 +1,8 @@
 buildscript {
     ext {
         springBootVersion = '2.1.9.RELEASE'
+        // springBootVersion 를 전역변수로 생성
+        // 그 값을 2.1.9.RELEASE 로 하겠다는 의미
     }
     repositories {
         mavenCentral()
@@ -11,21 +13,28 @@ buildscript {
     }
 }
 
+// 선언한 플러그인 의존성들을 적용할 것인지 결정하는 코드
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+// io.spring.dependency-management 플러그인은 스프링 부트의 의존성들을 관리해 주는 플러그인
+// 그래서 반드시 필요로한 플러그인이다.
 
 group 'com.jojoldu.book'
 version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = 1.8   
 
-repositories {
+repositories { //    각종 의존성들을 어떤 원격 저장소에서 받을 지 정한다.
     mavenCentral()
+//    mavenCentral는 이전부터 많이 사용하는 저장소
+//    본인이 만든 라이브러리를 업로드 하기 위해선 많은 과정과 설정이 필요하다.
     jcenter()
+//    이런문제때문에 라이브러리 업로드를 간단하게 하기 ㅜ이한 jcenter 가 나왔다.
 }
 
 dependencies {
+//    프로젝트 개발에 필요한 의존성들을 선언하는곳
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
