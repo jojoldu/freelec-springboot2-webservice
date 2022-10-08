@@ -1,10 +1,10 @@
 package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.service.PostsService;
-import com.jojoldu.book.springboot.web.dto.PostsListResponseDto;
-import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
-import com.jojoldu.book.springboot.web.dto.PostsSaveRequestDto;
-import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.jojoldu.book.springboot.web.dto.Posts.PostsListResponseDto;
+import com.jojoldu.book.springboot.web.dto.Posts.PostsResponseDto;
+import com.jojoldu.book.springboot.web.dto.Posts.PostsSaveRequestDto;
+import com.jojoldu.book.springboot.web.dto.Posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

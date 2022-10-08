@@ -1,13 +1,12 @@
 package com.jojoldu.book.springboot.web;
 
-import com.jojoldu.book.springboot.web.dto.HelloResponseDto;
+import com.jojoldu.book.springboot.web.dto.Posts.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-
     @GetMapping("/hello")
     public String hello() {
         return "hello";
@@ -18,5 +17,4 @@ public class HelloController {
                                      @RequestParam("amount") int amount) {
         return new HelloResponseDto(name, amount);
     }
-
 }
