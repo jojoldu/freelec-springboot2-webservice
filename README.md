@@ -49,7 +49,7 @@
 거기서 아래와 같이 명령어를 실행하시면 됩니다.
 
 ```bash
-gradlew wrapper --gradle-version 4.10.2
+.\gradlew wrapper --gradle-version 4.10.2
 ```
 
 ### Spring Boot 버전 체크
